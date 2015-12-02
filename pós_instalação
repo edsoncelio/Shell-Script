@@ -1,0 +1,79 @@
+#!/bin/bash
+#script automatizacao do sistema, usando interface gráfica
+#criacao de variaveis
+#usuario="$USER"
+#local n=${@-"anonymous person"}
+#armazenar opções do menu
+INPUT=/tmp/menu.sh.$$
+
+#armazenar saida
+OUTPUT=/tmp/menu_saida.sh.$$
+
+
+#saida  update
+function display_output(){
+	local h=${1-10}			# altura 10
+	local w=${2-41} 		# largura 41
+	local t=${3-Output} 	        # titulo 
+	dialog --backtitle "Configurações do Sistema" --title "${t}" --clear --msgbox "$(<$OUTPUT)" ${h} ${w}
+        clear
+}
+#saida install
+function display_install(){
+        local h=${1-10}                 # altura 10
+        local w=${2-41}                 # largura 41
+        local t=${3-Output}             # titulo 
+        PACOTES=$(whiptail --title "Ambientes  a serem instalados" --checklist \
+                "Escolha o que deseja instalar : " 18 63 5 \
+                "Netbeans" "IDE de desenvolvimento" OFF \
+                "Geany" "IDE de desenvolvimento" OFF \
+                "Arduino" "IDE de desenvolvimento" OFF \
+                "Eclipse" "IDE de desenvolvimento" OFF \
+                "Android " "IDE de desenvolvimento " OFF  3>&1 1>&2 2>&3)
+                status=$?                
+                clear
+if [ $status = 0]
+then
+    $PACOTES=$(<${INPUT})
+case $PACOTES in
+        Netbeans)sudo apt-get install netbeans;;
+        Geany) ;;
+        Sair) clear ; break;;
+esac
+fi 
+
+
+}
+
+
+
+#funcao de  atualizar
+atualizar_program(){
+echo "Atualizando programas ..." > $OUTPUT
+	display_output 10 25 "Atualizar"
+}
+instalar_program(){
+echo "Escolha os pacotes que deseja instalar" > $OUTPUT
+       display_install 10 25  "Instalar"
+}
+
+#menu
+dialog --clear --backtitle "Configurações do Sistema" \
+--title "[ M E N U ]" \
+--menu "As opções podem ser selecionadas usando CIMA/BAIXO,\
+ou usando as teclas numéricas 1 a 9. " 18 52 3 \
+Instalar "Instalação de programas essenciais" \
+Atualizar "Atualizar os programas existentes" \
+Sair "Sair do menu" 2> ${INPUT}
+
+itensmenu=$(<${INPUT})
+
+# selecionar opcao 
+case $itensmenu in
+	Instalar) instalar_program;;
+	Atualizar) atualizar_program;;
+	Sair) clear ; break;;
+esac
+ 
+done
+
