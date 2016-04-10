@@ -1,0 +1,44 @@
+#!/bin/bash
+#Mostrar qual a interface atual
+function de_detected(){
+					case "${XDG_CURRENT_DESKTOP}" in
+						ENLIGHTENMENT)
+							echo '>> Enlightenment';;
+						GNOME)
+							echo '>> Gnome';;
+						KDE)
+							echo '>> KDE';;
+						LUMINA)
+							echo '>> Lumina';;
+						LXDE)
+							echo '>> LXDE';;
+						MATE)
+							echo '>> Mate';;
+						XFCE)
+							echo '>> XFCE';;
+						X-Cinnamon)
+							echo '>> Cinnamon';;
+						Unity)
+							echo '>> Unity';;
+						LXQt)
+							echo '>> LXQt';;
+						*)
+						   echo '>> UNKNOW'	
+					esac
+				
+}				
+#Mostrar qual distro
+function distro(){
+DISTRO=$(cat /etc/os-release | grep  PRETTY_NAME | cut -c 13-)
+echo ${DISTRO} 
+}
+#Mostrar qual shell
+function shell(){
+echo ${SHELL} | cut -c 6- 
+}
+
+echo 'INTERFACE :'$(de_detected)
+echo 'DISTRO :'$(distro)
+echo 'SHELL :'$(shell)
+
+

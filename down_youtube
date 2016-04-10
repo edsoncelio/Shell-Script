@@ -1,0 +1,67 @@
+#!/bin/bash
+
+#Script para download de videos do Youtube versao 0.0.1
+#-------------------------------------------#
+#          TuxPilgrim (04/03/2016)          #
+#-------------------------------------------#
+
+
+
+
+erro_install(){
+     clear
+     echo 'programa não encontrado, tente :'
+     echo 'Debian base : sudo apt-get install youtube-dl'
+     echo 'Red Hat base: sudo dnf install youtube-dl'  
+ 	
+}
+
+erro_arg(){
+	clear
+	echo 'Download de Videos do Youtube'
+	echo 'versao 0.0.1'
+    echo 'usar: <./down_youtube> <URL> <Opt>'
+    echo 'Opt:'
+    echo '1 - video único'
+    echo '2 - Playlist'
+    echo '3 - Lista de URLs'
+    echo '4 - Extrair audio mp3'	
+}
+
+erro_opt(){
+   clear
+   echo 'opcao incorreta'
+   echo 'Opt:'
+   echo '1 - video único'
+   echo '2 - Playlist'
+   echo '3 - Lista de URLs'
+   echo '4 - Extrair audio mp3'
+}
+
+if [ $# -eq 2 ];then
+
+
+ if [ -e /usr/bin/youtube-dl ]; then
+     case '$2' in
+        '1')
+         youtube-dl -F $1;; 
+        '2')
+         youtube-dl --yes-playlist $1;;
+        '3')
+         youtube-dl -a $1;;
+         '4')
+         youtube-dl -x --audio-format mp3 $1;;
+         *)
+         erro_opt
+         esac        
+ else
+     erro_install
+ fi
+     
+else 
+   
+    erro_arg
+fi     
+
+
+

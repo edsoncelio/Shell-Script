@@ -1,0 +1,50 @@
+#!/bin/bash
+#Script para administração básica com o DNF
+# Opcoes :
+#1- listar pacotes obsolentos e remover
+#2- Upgrade
+#3- Limpar cache e arquivos temporarios
+#4- Listar pacotes que podem ser removidos com o Autoremove e remover
+#5- Listar repositorios disponiveis
+#6- Listar arquivo de conf do DNF
+#7- Listar pacotes instalados pelo usuário 
+error_arg(){
+echo 'Administracao usando DNF'
+echo 'versao 0.0.1'
+echo 'usar : <./dnf_admin> <Opcao>'	
+echo 'Opcoes :'
+echo '1- listar pacotes obsolentos e remover'
+echo '2- Upgrade'
+echo '3- Limpar cache e arquivos temporarios'
+echo '4- Listar pacotes que podem ser removidos com o Autoremove e remover'
+echo '5- Listar repositorios disponiveis'
+echo '6- Listar arquivo de conf do DNF'
+echo '7- Listar pacotes instalados pelo usuário'	
+}
+
+if [ $# -eq 1 ]; then
+
+   case "$1" in
+     '1')
+      sudo dnf list obsoleted;;      
+     '2') 
+      sudo dnf upgrade;;
+      '3')
+      sudo dnf clean all;;
+      '4')
+      sudo dnf -v list autoremove  
+      sudo dnf  --allowerasing autoremove;;
+      '5')
+      sudo dnf repolist;;
+      '6')	
+      cat /etc/dnf/dnf.conf;;       
+      '7')
+      sudo dnf history userinstalled;; 
+     *)
+     error_arg
+    esac  
+       
+else
+    error_arg
+    
+fi     		    
