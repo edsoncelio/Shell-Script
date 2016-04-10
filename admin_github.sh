@@ -1,4 +1,4 @@
-!#bin/bash
+!#/bin/bash
 
 #funciona com o git já instalado
 
