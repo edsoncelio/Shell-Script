@@ -26,5 +26,18 @@ git init
 echo 'caminho do repositorio HTTPS : '
 read caminho 
 
-git remote add  $caminho
+git remote add origin $caminho      #origin e o apelido
+
+#baixar o projeto
+git pull origin master
+
+
+#Nesse ponto o projeto ja esta configurado, agora os comandos basicos de uso:
+#git add <nome_arquivo>  >> adicionar UM arquivo ao controle de versao, nao ao repositorio ainda
+#git add . >> adicionar TODAS as alteracoes ao controle de versao
+#git commit -m "<comentario>" >> "commitar" as alteracoes
+#git push origin master >> enviar as alteracoes ao repositorio
+#git fetch origin >> atualizar o projeto local, util pro caso de mais de uma pessoa trabalhando
+
+
 
