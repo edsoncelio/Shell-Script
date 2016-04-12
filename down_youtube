@@ -41,17 +41,19 @@ erro_opt(){
 if [ $# -eq 2 ];then
 
 
+
  if [ -e /usr/bin/youtube-dl ]; then
-     case '$2' in
-        '1')
-         youtube-dl -F $1;; 
-        '2')
+     case $2 in
+        "1")
+         echo "baixando..."
+         youtube-dl  --no-playlist $1;; 
+        "2")
          youtube-dl --yes-playlist $1;;
-        '3')
+        "3")
          youtube-dl -a $1;;
-         '4')
+        "4")
          youtube-dl -x --audio-format mp3 $1;;
-         *)
+        *)
          erro_opt
          esac        
  else
