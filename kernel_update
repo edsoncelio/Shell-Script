@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#Script para operacoes do kernel
+
+version=$(uname -r | cut -c 1-)
+#ping=$(ping google.com) 
+if [ $# -eq 1 ]; then 
+   case "$1" in
+     '1')
+      echo 'versao atual : '${version}
+      ;;
+      '2')
+      echo 'verificando atualizacoes ...'
+      version_recente= lynx -dump https://www.kernel.org | grep mainline | awk '{print $2}'      
+      if [ $version_recent ]     
+      echo "sua versao "${version}
+      ;;
+      '3')
+      echo 'atualizando kernel ...'
+      ;; 
+      *)
+     esac 
+
+else
+    
+    echo 'usar : <./kernel_update> <opcao>'
+    echo 'Opcoes:'
+    echo '1- Mostrar versao'
+    echo '2- Verificar atualizacoes'
+    echo '3- Atualizar kernel'	
+fi    
