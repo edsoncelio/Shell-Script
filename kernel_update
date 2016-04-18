@@ -12,7 +12,6 @@ if [ $# -eq 1 ]; then
       '2')
       echo 'verificando atualizacoes ...'
       version_recente= lynx -dump https://www.kernel.org | grep mainline | awk '{print $2}'      
-      if [ $version_recent ]     
       echo "sua versao "${version}
       ;;
       '3')
