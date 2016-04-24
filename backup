@@ -1,0 +1,29 @@
+#!/bin/bash
+
+#backup de diretorio específico
+
+
+function ajuda(){
+ echo 'backup versao 0.0.1'
+ echo 'usar : <./backup> <diretorio/arquivo> <opcao>' 
+ echo 'opcao:'
+ echo '1-.tar'
+ echo '2-.zip'
+}
+
+if [ $# -eq 2 ]; then
+   if [ $2 -eq 1 ]; then 
+     if [ -e $1 ]; then
+          echo 'iniciando...'  
+          tar cfv backup.tar $1
+          echo 'compactacao terminada com sucesso!'
+      else
+          echo 'diretorio nao encontrado!'    
+      fi   
+   else
+       echo 'zip...'   
+   fi
+else
+    echo 'argumentos incorretos!'
+    ajuda 
+fi                 

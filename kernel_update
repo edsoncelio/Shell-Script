@@ -2,7 +2,7 @@
 
 #Script para operacoes do kernel
 
-version=$(uname -r | cut -c 1-)
+version=$(uname -r | cut -c 1-5)
 #ping=$(ping google.com) 
 if [ $# -eq 1 ]; then 
    case "$1" in
@@ -11,8 +11,13 @@ if [ $# -eq 1 ]; then
       ;;
       '2')
       echo 'verificando atualizacoes ...'
-      version_recente= lynx -dump https://www.kernel.org | grep mainline | awk '{print $2}'      
+      version_recente= lynx -dump https://www.kernel.org | grep mainline | awk '{print "versao mais recente : "$2}'    
       echo "sua versao "${version}
+      if [$version_recente -eq $(uname -r | cut -c 1-3) ]; then
+         echo "versao mais atual instalada!!"
+      else
+          echo "versao mais recente disponivel!!"
+      fi       
       ;;
       '3')
       echo 'atualizando kernel ...'
