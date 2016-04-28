@@ -21,7 +21,8 @@ if [ $# -eq 2 ]; then
           echo 'diretorio nao encontrado!'    
       fi   
    else
-       echo 'zip...'   
+       echo 'iniciando...'
+       zip -r backup.zip $1   
    fi
 else
     echo 'argumentos incorretos!'
